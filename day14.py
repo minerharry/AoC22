@@ -6,6 +6,8 @@ lines = getInput();
 
 paths = [];
 
+
+
 maxY = -1;
 
 for l in lines:
@@ -61,7 +63,7 @@ while True:
         if blocked:
             continue;
         rocks.add(sand);
-        print("sand",acc,"stopped at position",sand);
+        # print("sand",acc,"stopped at position",sand);
         break;
     if sand == sStart:
         break;

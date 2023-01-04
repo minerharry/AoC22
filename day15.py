@@ -2,15 +2,13 @@ from typing import Literal
 from text import getInput
 import numpy as np
 from tqdm import tqdm
+from utils import mDist
 
 lines = getInput();
 
 acc = 0;
 
 sensedBeacons = {}
-
-def mDist(p1,p2):
-    return abs(p1[0]-p2[0])+abs(p1[1]-p2[1]);
 
 for l in lines:
     s,b = l.split("at")[1:];

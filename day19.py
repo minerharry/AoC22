@@ -6,6 +6,8 @@ from tqdm import tqdm
 import re
 from numpy.typing import NDArray
 
+from utils import redirect_to_tqdm
+
 nSteps = 24;
 
 robot_regex = re.compile("Each ([a-zA-Z]+) robot costs (.*?)\\.")
@@ -40,23 +42,7 @@ bar = None;
 leaf_bar = None;
 prune_bar = None;
 best_bar = None;
-@contextlib.contextmanager
-def redirect_to_tqdm():
-    # Store builtin print
-    old_print = print
-    def new_print(*args, **kwargs):
-        # If tqdm.tqdm.write raises error, use builtin print
-        try:
-            tqdm.write(*args, **kwargs)
-        except:
-            old_print(*args, ** kwargs)
 
-    try:
-        # Globaly replace print with new_print
-        inspect.builtins.print = new_print
-        yield
-    finally:
-        inspect.builtins.print = old_print
 
 def search_geode(blueprint_idx:int,robots:dict[str,int]={'ore':1,'clay':0,'obsidian':0,'geode':0},amounts:dict[str,int]={n:0 for n in names},steps:int=nSteps):
     bar.update(1);
